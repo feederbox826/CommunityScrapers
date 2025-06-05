@@ -1,0 +1,28 @@
+name: SexTB
+sceneByURL:
+  - action: scrapeXPath
+    url:
+      - sextb.net
+      - sextb.date
+    scraper: sceneScraper
+xPathScrapers:
+  sceneScraper:
+    common:
+      $title: //h1[@class="film-info-title"]/strong
+      $fileinfo: //div[@id="infomation"]/div[@class="col-7"]
+    scene:
+      Title: $title/text()[1]
+      Code: $title/a[1]/text()
+      Director: $fileinfo/div[1]/a/strong/text()
+      Date:
+        selector: $fileinfo/div[7]/strong/text()
+        postProcess:
+          - parseDate: Jan. 2, 2006
+      Image: //div[@id="infomation"]/div[contains(@class,"covert")]/img/@data-src
+      Studio:
+        Name: $fileinfo/div[3]/a/strong/text()
+      Tags:
+        Name: $fileinfo/div[5]/a/strong/text()
+      Performers:
+        Name: $fileinfo/div[4]/a/strong/text()
+# Last Updated February XX, 2025
